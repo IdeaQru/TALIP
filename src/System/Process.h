@@ -15,6 +15,19 @@
 #define endSteps 8
 #define phi 3.14159265359
 #define JUMLAH_DXL_PRTOKOL2 14
+// Tambahkan di akhir Process.h:
+
+// External emergency control flags
+extern bool emergencyStopRequested;
+extern bool criticalShutdownRequested;
+extern bool motionChangeRequested;
+extern int requestedMotionType;
+
+// External status variables
+extern bool systemHealthy;
+extern bool thermalOK; 
+extern bool batteryOK;
+extern String lastSystemStatus;
 
 struct MOTIONROBOT
 {
@@ -60,14 +73,14 @@ struct MOTIONROBOT
 };
 int walkAtPlace[8][15] = {
     //  xl   yl   zl   hl   xr   yr   zr   hr   L_X  L_Y  L_Z  R_X  R_Y  R_Z  spd
-    {    0,  45,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  10},
-    {    0,  45,   0,   0,   0,  55,  30,   0,   0,   0,   0,   0,   0,   0,  15},
-    {    0,  45,   0,   0,   0,  55,  30,   0,   0,   0,   0,   0,   0,   0,  15},
-    {    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  10},
-    {    0, -55,   0,   0,   0, -45,   0,   0,   0,   0,   0,   0,   0,   0,  10},
-    {    0, -55,  30,   0,   0, -45,   0,   0,   0,   0,   0,   0,   0,   0,  15},
-    {    0, -55,  30,   0,   0, -45,   0,   0,   0,   0,   0,   0,   0,   0,  15},
-    {    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  10}
+    {    0,  45,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  7},
+    {    0,  45,   0,   0,   0,  55,  30,   0,   0,   0,   0,   0,   0,   0,  10},
+    {    0,  45,   0,   0,   0,  55,  30,   0,   0,   0,   0,   0,   0,   0,  10},
+    {    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  5},
+    {    0, -55,   0,   0,   0, -45,   0,   0,   0,   0,   0,   0,   0,   0,  7},
+    {    0, -55,  30,   0,   0, -45,   0,   0,   0,   0,   0,   0,   0,   0,  10},
+    {    0, -55,  30,   0,   0, -45,   0,   0,   0,   0,   0,   0,   0,   0,  10},
+    {    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  5}
 };
     int stopMotion[8][15] = {
         //  xl   yl   zl   hl   xr   yr   zr   hr   L_X  L_Y  L_Z  R_X  R_Y  R_Z  spd
@@ -122,4 +135,5 @@ private:
     HWT hwt;
     PID pid;
     ARM_SMOOTHER armSmoother;
+
 };
